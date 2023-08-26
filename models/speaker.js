@@ -27,18 +27,3 @@ module.exports= {
 }
 
 
-/*speakerDetails: {
-    speakerName: {
-      type: String,
-      required: true,
-    },
-    socialMediaHandles: {
-      twitter: String,
-      instagram: String,
-      facebook: String,
-    },
-    experiences: {
-      type: Array,
-      required: true,
-    },
-  },*/

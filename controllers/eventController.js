@@ -114,8 +114,8 @@ const addSpeakerDetails = async (req, res) => {
 };
 const getEvents= async (req,res)=>{
     try{
-        const allevents = await Event.find();
-        res.status(200).json({success: true, statusCode: 200, data: allevents});
+        const allEvents = await Event.find();
+        res.status(200).json({success: true, statusCode: 200, data: allEvents});
 
     }
     catch(error){
@@ -123,4 +123,15 @@ const getEvents= async (req,res)=>{
         res.status(500).json({success: false, statusCode: 500, msge: "failed to get the get request"})
     }
 };
-module.exports = { addEventDetails, addSpeakerDetails, getEvents};
+const getSpeakers= async (req,res)=>{
+    try{
+        const allSpeakers = await Speaker.find();
+        res.status(200).json({success: true, statusCode: 200, data: allSpeakers});
+
+    }
+    catch(error){
+        console.log("encoutered error while fetching all the speakers");
+        res.status(500).json({success: false, statusCode: 500, msge: "failed to get the get request"})
+    }
+};
+module.exports = { addEventDetails, addSpeakerDetails, getEvents, getSpeakers};
