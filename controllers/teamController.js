@@ -3,7 +3,7 @@ const { Team } = require("../models/team");
 
 const addTeamMembers = async (req, res) => {
   try {
-    const { image, name, role, linkedin, instagram, github } = req.body;
+    const { image, name, role, linkedin, instagram, github, tag} = req.body;
     if (image === undefined || image === null || image === "") {
       return res
         .status(400)
