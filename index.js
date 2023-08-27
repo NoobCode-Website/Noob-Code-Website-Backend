@@ -20,7 +20,7 @@ const eventRouter = require("./routes/eventRouter");
 const teamRouter = require("./routes/teamRouter");
 
 app.use("/events", eventRouter);
-app.use("/team", teamRouter);
+app.use("/teams", teamRouter);
 
 
 
