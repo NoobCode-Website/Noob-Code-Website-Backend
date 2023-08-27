@@ -75,7 +75,7 @@ const addEventDetails = async (req, res) => {
 const addSpeakerDetails = async (req, res) => {
   try {
     const { image, speaker, description, twitter, linkedin, instagram } = req.body;
-    if (image === null || iamge === undefined || iamge === "") {
+    if (image === null || image === undefined || image === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
