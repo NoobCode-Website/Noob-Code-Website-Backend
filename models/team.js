@@ -24,6 +24,10 @@ const teamSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    tag:{
+        type: String,
+        required: true
+    }
 })
 module.exports={
     Team: mongoose.model('Team', teamSchema, 'team')

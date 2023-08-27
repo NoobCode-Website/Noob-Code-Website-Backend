@@ -53,6 +53,15 @@ const addTeamMembers = async (req, res) => {
           message: "Github is required",
         });
     }
+    else if (tag === undefined || tag === null || tag === "") {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          statusCode: 400,
+          message: "Tag is required",
+        });
+    }
     const newMember = await Team.create({
       image: image,
       name: name,
@@ -60,6 +69,7 @@ const addTeamMembers = async (req, res) => {
       linkedin: linkedin,
       instagram: instagram,
       github: github,
+      tag: tag,
     });
     const temp = { ...newMember._doc };
     delete temp._id;
