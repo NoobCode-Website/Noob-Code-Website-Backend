@@ -18,11 +18,11 @@ app.all("/", (req, res) => {
 //Routers
 const eventRouter = require("./routes/eventRouter");
 const teamRouter = require("./routes/teamRouter");
+const ambassadorRouter = require("./routes/ambassadorRouter");
 
 app.use("/events", eventRouter);
 app.use("/teams", teamRouter);
-
-
+app.use("/ambassadors", ambassadorRouter);
 
 const mongooseUri = process.env.MONGO_URI; // Set this environment variable in Vercel
 
