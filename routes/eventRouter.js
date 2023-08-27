@@ -6,6 +6,11 @@ const eventrouter = express.Router();
 
 eventrouter.post ('/addevent', addEventDetails)
 eventrouter.post('/addspeaker', addSpeakerDetails)
+eventrouter.post('/addcontest', addContestDetails)
+eventrouter.post('/addcollab', addCollabDetails)
+eventrouter.get ('/getcontests', getContests)
+eventrouter.get ('/getcollabs', getCollabs)
 eventrouter.get ('/getevents', getEvents)
 eventrouter.get ('/getspeakers', getSpeakers)
+
 module.exports= eventrouter;
