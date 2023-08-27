@@ -8,7 +8,7 @@ const { Collab } = require("../models/collab");
 //Add Event Details
 const addEventDetails = async (req, res) => {
   try {
-    const { image, activity, date, venue, footfall, youtube } = req.body;
+    const { image, activity, date, venue, footfall, youtube, sname, simage, sdescription } = req.body;
     console.log(req.body);
     if (image === null || image === undefined || image === "") {
       return res.status(400).json({
@@ -47,7 +47,26 @@ const addEventDetails = async (req, res) => {
         statusCode: 400,
         msg: "Please enter correct URL",
       });
+    }else if (sname === null || sname === undefined || sname === "") {
+      res.return({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter correct URL",
+      });
+    }else if (simage === null || simage === undefined || simage === "") {
+      res.return({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter correct URL",
+      });
+    }else if (sdescription === null || sdescription === undefined || sdescription === "") {
+      res.return({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter correct URL",
+      });
     }
+    
 
     const newEvent = await Event.create({
       image: image,
@@ -56,6 +75,9 @@ const addEventDetails = async (req, res) => {
       venue: venue,
       footfall: footfall,
       youtube: youtube,
+      sname: sname,
+      simage: simage,
+      sdescription: sdescription
     });
     const temp = {...newEvent._doc};
          delete temp._id;
