@@ -1,6 +1,10 @@
 const mongoose = require ("mongoose")
 const speakerSchema = new mongoose.Schema({
-    speaker: {
+  image: {
+    type: String,
+    required: true,
+  },  
+  speaker: {
         type: String,
         required: true,
       },

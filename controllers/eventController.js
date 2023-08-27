@@ -1,6 +1,6 @@
 const { Event } = require("../models/event");
 const { Speaker } = require("../models/speaker");
-const { Contest } = require("../models/contest");
+const { Contest } = require("../models/contests");
 const { Collab } = require("../models/collab");
 
 //POST REQUESTS
@@ -8,9 +8,16 @@ const { Collab } = require("../models/collab");
 //Add Event Details
 const addEventDetails = async (req, res) => {
   try {
-    const { activity, date, venue, footfall, youtube } = req.body;
+    const { image, activity, date, venue, footfall, youtube } = req.body;
     console.log(req.body);
-    if (activity === null || activity === undefined || activity === "") {
+    if (image === null || image === undefined || image === "") {
+      return res.status(400).json({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter the image URL",
+      });
+    }
+    else if (activity === null || activity === undefined || activity === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -43,13 +50,17 @@ const addEventDetails = async (req, res) => {
     }
 
     const newEvent = await Event.create({
+      image: image,
       activity: activity,
       date: date,
       venue: venue,
       footfall: footfall,
       youtube: youtube,
     });
-    res.status(200).json({ success: true, statusCode: 200, data: newEvent });
+    const temp = {...newEvent._doc};
+         delete temp._id;
+            delete temp.__v;
+    res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.error("Error executed while adding a new Event");
     res.status(400).json({
@@ -63,8 +74,15 @@ const addEventDetails = async (req, res) => {
 //Add Speaker Details
 const addSpeakerDetails = async (req, res) => {
   try {
-    const { speaker, description, twitter, linkedin, instagram } = req.body;
-    if (speaker === null || speaker === undefined || speaker === "") {
+    const { iamge, speaker, description, twitter, linkedin, instagram } = req.body;
+    if (iamge === null || iamge === undefined || iamge === "") {
+      return res.status(400).json({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter the image URL",
+      });
+    }
+    else if (speaker === null || speaker === undefined || speaker === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -104,13 +122,17 @@ const addSpeakerDetails = async (req, res) => {
       });
     }
     const newSpeaker = await Speaker.create({
+      image: iamge,
       speaker: speaker,
       description: description,
       twitter: twitter,
       linkedin: linkedin,
       instagram: instagram,
     });
-    res.status(200).json({ success: true, statusCode: 200, data: newSpeaker });
+    const temp = {...newSpeaker._doc};
+         delete temp._id;
+            delete temp.__v;
+    res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.log("Error found while adding new speaker");
     res.status(400).json({
@@ -122,11 +144,18 @@ const addSpeakerDetails = async (req, res) => {
 };
 
 //Add Contest Details
-const addContestDetails = async (req, res) => {
+const addContest = async (req, res) => {
   try {
-    const { contest, date, time, venue, footfall, description, hackerrank } =
+    const { image, contest, date, time, venue, footfall, description, hackerrank } =
       req.body;
-    if (contest === null || contest === undefined || contest === "") {
+      if (image === null || image === undefined || image === "") {
+        return res.status(400).json({
+          success: false,
+          statusCode: 400,
+          msg: "Please enter the image URL",
+        });
+      }
+    else if (contest === null || contest === undefined || contest === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -178,6 +207,7 @@ const addContestDetails = async (req, res) => {
       });
     }
     const newContest = await Contest.create({
+      image: image,
       contest: contest,
       date: date,
       time: time,
@@ -186,7 +216,10 @@ const addContestDetails = async (req, res) => {
       description: description,
       hackerrank: hackerrank,
     });
-    res.status(200).json({ success: true, statusCode: 200, data: newContest });
+    const temp = {...newContest._doc};
+         delete temp._id;
+            delete temp.__v;
+    res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.log("Error found while adding new contest");
     res.status(400).json({
@@ -200,8 +233,15 @@ const addContestDetails = async (req, res) => {
 //Add Collab Details
 const addCollabDetails = async (req, res) => {
   try {
-    const { name, date, venue, description, partnerWebsite } = req.body;
-    if (name === null || name === undefined || name === "") {
+    const { image, name, date, venue, description, partnerWebsite } = req.body;
+    if (image === null || image === undefined || image === "") {
+      return res.status(400).json({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter the image URL",
+      });
+    }
+    else if (name === null || name === undefined || name === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -241,14 +281,17 @@ const addCollabDetails = async (req, res) => {
       });
     }
     const newCollab = await Collab.create({
+      image: image,
       name: name,
       date: date,
       venue: venue,
       description: description,
       partnerWebsite: partnerWebsite,
     });
-
-    res.status(200).json({ success: true, statusCode: 200, data: newCollab });
+    const temp = {...newCollab._doc};
+    delete temp._id;
+       delete temp.__v;
+    res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.log("Error found while adding new collab");
     res.status(400).json({
@@ -327,4 +370,4 @@ const getCollabs = async (req, res) => {
 
 
 
-module.exports = { addEventDetails, addSpeakerDetails, getEvents, getSpeakers, addContestDetails, addCollabDetails, getContests, getCollabs };
+module.exports = { addEventDetails, addSpeakerDetails, getEvents, getSpeakers, addContest, addCollabDetails, getContests, getCollabs };

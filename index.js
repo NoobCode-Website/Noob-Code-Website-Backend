@@ -17,22 +17,14 @@ app.all("/", (req, res) => {
 
 //Routers
 const eventRouter = require("./routes/eventRouter");
+const teamRouter = require("./routes/teamRouter");
+
 app.use("/events", eventRouter);
+app.use("/team", teamRouter);
 
-mongoose
-  .connect(
-    "mongodb+srv://Noobcode:Noobcode2023@cluster0.jrrcqf6.mongodb.net/?retryWrites=true&w=majority"
-  )
-  .then(() => {
-    app.listen(process.env.port || 3000, () => {
-      console.log("Your Server is running");
-    });
-  })
-  .catch((error)=>{
-    console.log("error");
-  });
 
-/*const mongooseUri = process.env.MONGO_URI; // Set this environment variable in Vercel
+
+const mongooseUri = process.env.MONGO_URI; // Set this environment variable in Vercel
 
 mongoose
   .connect(mongooseUri, {
@@ -46,4 +38,4 @@ mongoose
   })
   .catch((error) => {
     console.log("Error connecting to MongoDB:", error);
-  });*/
+  });

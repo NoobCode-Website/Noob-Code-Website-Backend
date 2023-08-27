@@ -12,6 +12,10 @@
         "dest": "/index.js"
       },
       {
+        "src":"/team",
+        "dest":"/index.js"
+      },
+      {
         "src": ".*",
         "dest": "/index.js"
       }
