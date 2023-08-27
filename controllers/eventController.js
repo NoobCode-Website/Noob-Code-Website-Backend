@@ -74,8 +74,8 @@ const addEventDetails = async (req, res) => {
 //Add Speaker Details
 const addSpeakerDetails = async (req, res) => {
   try {
-    const { iamge, speaker, description, twitter, linkedin, instagram } = req.body;
-    if (iamge === null || iamge === undefined || iamge === "") {
+    const { image, speaker, description, twitter, linkedin, instagram } = req.body;
+    if (image === null || iamge === undefined || iamge === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -122,7 +122,7 @@ const addSpeakerDetails = async (req, res) => {
       });
     }
     const newSpeaker = await Speaker.create({
-      image: iamge,
+      image: image,
       speaker: speaker,
       description: description,
       twitter: twitter,
