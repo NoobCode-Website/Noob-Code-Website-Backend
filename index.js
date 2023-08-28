@@ -12,7 +12,7 @@ app.use(
 
 app.all("/", (req, res) => {
   console.log("Just got a request!");
-  res.send("Soumyaraj is sexy");
+  res.send("NooCode is ready");
 });
 
 //Routers
