@@ -25,18 +25,6 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  sname: {
-    type: String,
-    required: true,
-  },
-  simage: {
-    type: String,
-    required: true,
-  },
-  sdescription: {
-    type: String,
-    required: true,
-  },
 });
 
 module.exports = {
