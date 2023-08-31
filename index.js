@@ -24,7 +24,7 @@ app.use("/events", eventRouter);
 app.use("/teams", teamRouter);
 app.use("/ambassadors", ambassadorRouter);
 
-const mongooseUri = process.env.MONGO_URI; // Set this environment variable in Vercel
+const mongooseUri = process.env.MONGO_URI || "default_fallback_uri"; 
 
 mongoose
   .connect(mongooseUri, {
