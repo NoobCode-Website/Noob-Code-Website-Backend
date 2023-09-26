@@ -21,6 +21,7 @@ const addAmbassadors = async (req, res) => {
           statusCode: 400,
           message: "Name is required",
         });
+
       } else if (email === undefined || email === null || email === "") {
         return res.status(400).json({
           success: false,

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+//const mongoose = require("mongoose");
+const connectDB = require("./config/database");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -26,18 +27,8 @@ app.use("/events", eventRouter);
 app.use("/teams", teamRouter);
 app.use("/ambassadors", ambassadorRouter);
 
-const mongooseUri = process.env.MONGO_URI || "default_fallback_uri"; 
-
-mongoose
-  .connect(mongooseUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-      console.log("Your Server is running");
-    });
-  })
-  .catch((error) => {
-    console.log("Error connecting to MongoDB:", error);
-  });
+connectDB();
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 5000}`);
+}
+);
