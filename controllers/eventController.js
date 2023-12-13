@@ -3,12 +3,9 @@ const { Speaker } = require("../models/speaker");
 const { Contest } = require("../models/contests");
 const { Collab } = require("../models/collab");
 
-//POST REQUESTS
-
-//Add Event Details
 const addEventDetails = async (req, res) => {
   try {
-    const { image, activity, date, venue, footfall, youtube} = req.body;
+    const { image, activity, date, venue, footfall, youtube } = req.body;
     console.log(req.body);
     if (image === null || image === undefined || image === "") {
       return res.status(400).json({
@@ -16,8 +13,7 @@ const addEventDetails = async (req, res) => {
         statusCode: 400,
         msg: "Please enter the image URL",
       });
-    }
-    else if (activity === null || activity === undefined || activity === "") {
+    } else if (activity === null || activity === undefined || activity === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -56,9 +52,9 @@ const addEventDetails = async (req, res) => {
       footfall: footfall,
       youtube: youtube,
     });
-    const temp = {...newEvent._doc};
-         delete temp._id;
-            delete temp.__v;
+    const temp = { ...newEvent._doc };
+    delete temp._id;
+    delete temp.__v;
     res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.error("Error executed while adding a new Event");
@@ -72,65 +68,28 @@ const addEventDetails = async (req, res) => {
 
 //Add Speaker Details
 const addSpeakerDetails = async (req, res) => {
+  const { event, speaker } = req.body;
   try {
-    const { image, speaker, description, twitter, linkedin, instagram } = req.body;
-    if (image === null || image === undefined || image === "") {
+    if (event === null || event === undefined || event === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
-        msg: "Please enter the image URL",
+        msg: "Please enter the event name",
       });
-    }
-    else if (speaker === null || speaker === undefined || speaker === "") {
+    } else if (speaker === null || speaker === undefined || speaker === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
-        msg: "Please enter the speaker's name",
-      });
-    } else if (
-      description === null ||
-      description === undefined ||
-      description === ""
-    ) {
-      return res.status(400).json({
-        success: false,
-        statusCode: 400,
-        msg: "Please enter Description",
-      });
-    } else if (twitter === null || twitter === undefined || twitter === "") {
-      return res.status(400).json({
-        success: false,
-        statusCode: 400,
-        msg: "Please enter Twitter URL",
-      });
-    } else if (linkedin === null || linkedin === undefined || linkedin === "") {
-      return res.status(400).json({
-        success: false,
-        statusCode: 400,
-        msg: "Please enter LinkedIn URL",
-      });
-    } else if (
-      instagram === null ||
-      instagram === undefined ||
-      instagram === ""
-    ) {
-      return res.status(400).json({
-        success: false,
-        statusCode: 400,
-        msg: "Please enter Instagram URL",
+        msg: "Please enter the speaker name",
       });
     }
     const newSpeaker = await Speaker.create({
-      image: image,
+      event: event,
       speaker: speaker,
-      description: description,
-      twitter: twitter,
-      linkedin: linkedin,
-      instagram: instagram,
     });
-    const temp = {...newSpeaker._doc};
-         delete temp._id;
-            delete temp.__v;
+    const temp = { ...newSpeaker._doc };
+    delete temp._id;
+    delete temp.__v;
     res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.log("Error found while adding new speaker");
@@ -145,16 +104,23 @@ const addSpeakerDetails = async (req, res) => {
 //Add Contest Details
 const addContest = async (req, res) => {
   try {
-    const { image, contest, date, time, venue, footfall, description, hackerrank } =
-      req.body;
-      if (image === null || image === undefined || image === "") {
-        return res.status(400).json({
-          success: false,
-          statusCode: 400,
-          msg: "Please enter the image URL",
-        });
-      }
-    else if (contest === null || contest === undefined || contest === "") {
+    const {
+      image,
+      contest,
+      date,
+      time,
+      venue,
+      footfall,
+      description,
+      hackerrank,
+    } = req.body;
+    if (image === null || image === undefined || image === "") {
+      return res.status(400).json({
+        success: false,
+        statusCode: 400,
+        msg: "Please enter the image URL",
+      });
+    } else if (contest === null || contest === undefined || contest === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -215,9 +181,9 @@ const addContest = async (req, res) => {
       description: description,
       hackerrank: hackerrank,
     });
-    const temp = {...newContest._doc};
-         delete temp._id;
-            delete temp.__v;
+    const temp = { ...newContest._doc };
+    delete temp._id;
+    delete temp.__v;
     res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.log("Error found while adding new contest");
@@ -239,8 +205,7 @@ const addCollabDetails = async (req, res) => {
         statusCode: 400,
         msg: "Please enter the image URL",
       });
-    }
-    else if (name === null || name === undefined || name === "") {
+    } else if (name === null || name === undefined || name === "") {
       return res.status(400).json({
         success: false,
         statusCode: 400,
@@ -287,9 +252,9 @@ const addCollabDetails = async (req, res) => {
       description: description,
       partnerWebsite: partnerWebsite,
     });
-    const temp = {...newCollab._doc};
+    const temp = { ...newCollab._doc };
     delete temp._id;
-       delete temp.__v;
+    delete temp.__v;
     res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
     console.log("Error found while adding new collab");
@@ -301,11 +266,7 @@ const addCollabDetails = async (req, res) => {
   }
 };
 
-
-
 //GET REQUESTS
-
-
 
 const getEvents = async (req, res) => {
   try {
@@ -343,7 +304,6 @@ const getContests = async (req, res) => {
       success: false,
       statusCode: 500,
       msge: "failed to get the get request",
-
     });
   }
 };
@@ -362,11 +322,13 @@ const getCollabs = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
-
-module.exports = { addEventDetails, addSpeakerDetails, getEvents, getSpeakers, addContest, addCollabDetails, getContests, getCollabs };
+module.exports = {
+  addEventDetails,
+  addSpeakerDetails,
+  getEvents,
+  getSpeakers,
+  addContest,
+  addCollabDetails,
+  getContests,
+  getCollabs,
+};

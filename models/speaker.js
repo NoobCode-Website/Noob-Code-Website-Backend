@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
-const speakerSchema = new mongoose.Schema({
+
+const speakerData = new mongoose.Schema({
   image: {
     type: String,
     required: true,
   },
-  speaker: {
+  name: {
     type: String,
     required: true,
   },
   description: {
-    type: String,
+    type: [String],
     required: true,
   },
   twitter: {
@@ -22,6 +23,17 @@ const speakerSchema = new mongoose.Schema({
   },
   instagram: {
     type: String,
+    required: true,
+  },
+});
+
+const speakerSchema = new mongoose.Schema({
+  event: {
+    type: String,
+    required: true,
+  },
+  speaker: {
+    type: [speakerData],
     required: true,
   },
 });
