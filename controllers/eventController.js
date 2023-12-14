@@ -92,7 +92,7 @@ const addSpeakerDetails = async (req, res) => {
     delete temp.__v;
     res.status(200).json({ success: true, statusCode: 200, data: temp });
   } catch (error) {
-    console.log("Error found while adding new speaker");
+    console.log(error);
     res.status(400).json({
       success: false,
       statusCode: 400,

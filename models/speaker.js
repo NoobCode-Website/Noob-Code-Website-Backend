@@ -9,21 +9,45 @@ const speakerData = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+  session: {
+    type: String,
+    required: true,
+  },
+  sessionDetails: {
+    type: [String],
+    required: false,
+  },
+  sessionImages: {
+    type: [String],
+    required: false,
+  },
+  ylink: {
+    type: String,
+    required: false,
+  },
+  date: {
+    type: String,
+    required: true,
+  },
+  qualification: {
     type: [String],
     required: true,
   },
   twitter: {
     type: String,
-    required: true,
+    required: false,
+  },
+  github: {
+    type: String,
+    required: false,
   },
   linkedin: {
     type: String,
-    required: true,
+    required: false,
   },
   instagram: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 
