@@ -19,13 +19,15 @@ app.all("/", (req, res) => {
 });
 
 //Routers
-const eventRouter = require("./routes/eventRouter");
-const teamRouter = require("./routes/teamRouter");
-const ambassadorRouter = require("./routes/ambassadorRouter");
+const eventRouter = require("./routes/eventRouter.js");
+const teamRouter = require("./routes/teamRouter.js");
+const ambassadorRouter = require("./routes/ambassadorRouter.js");
+const authRouter = require("./routes/authRouter.js");
 
 app.use("/events", eventRouter);
 app.use("/teams", teamRouter);
 app.use("/ambassadors", ambassadorRouter);
+app.use("/auth", authRouter);
 
 connectDB();
 app.listen(process.env.PORT || 5000, () => {
